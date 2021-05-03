@@ -26,5 +26,11 @@ if len(profile_names) != 0:
         wifi_profile = {}
         # Now we run more specific commands to get the information we need
         # about the wifi connection and see if there is a security key
-    profile_info = subprocess.run(["netsh", "wlan", "show", "profile", n], capture_output= True).stdout.decode()
-    #print(profile_info)
+        profile_info = subprocess.run(["netsh", "wlan", "show", "profile", n], capture_output= True).stdout.decode()
+        #print(profile_info)
+        # look for cases where there is no password so we can skip them
+        if re.search("Security key           : Absent", profile_info):
+            continue
+        else:
+            # Assign the SSID to the dictionary
+            wifi_profile["ssid"] = n

@@ -26,5 +26,5 @@ if len(profile_names) != 0:
         wifi_profile = {}
         # Now we run more specific commands to get the information we need
         # about the wifi connection and see if there is a security key
-    profile_ info
-
+    profile_info = subprocess.run(["netsh", "wlan", "show", "profile", n], capture_output= True).stdout.decode()
+    #print(profile_info)
